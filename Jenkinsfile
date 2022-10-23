@@ -5,7 +5,7 @@ node {
     checkout scm
   }
   stage('Testeo') {
-     myGradleContainer.inside("-v ${env.HOME}/.gradle:/home/gradle/.gradle") {
+     myGradleContainer.inside("-v ${env.HOME}/.gradle:/home/.gradle") {
        sh 'cd complete && gradle test'
      }
   }

@@ -1,17 +1,17 @@
 node {
-  def server = Artifactory.server('cursojenkinsmac.jfrog.io')
+  def server = Artifactory.server('rodiebar.jfrog.io')
   def myGradleContainer = docker.image('gradle:jdk8-alpine')
   myGradleContainer.pull()
   stage('Preparacion') {
     checkout scm
   }
   stage('Construccion/Build') {
-     myGradleContainer.inside("-v ${env.HOME}/.gradle:/home/gradle/.gradle") {
+     myGradleContainer.inside("-v ${env.HOME}/.gradle:/home/.gradle") {
        sh 'cd complete && ./gradlew build'
      }
   }
   stage('Testeo') {
-     myGradleContainer.inside("-v ${env.HOME}/.gradle:/home/gradle/.gradle") {
+     myGradleContainer.inside("-v ${env.HOME}/.gradle:/home/.gradle") {
        sh 'cd complete && ./gradlew test'
      }
   }
